@@ -242,6 +242,15 @@ class Fun(commands.Cog):
 		em.add_field(name="Explanation", value=ex)
 		await ctx.send(embed=em)
 
+	@commands.command()
+	async def dog(self, ctx):
+		url = nekos.img('woof')
+		em = discord.Embed(color=discord.Color.blue())
+		em.set_image(url=url)
+		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
+		await ctx.send(embed=em)
+		
+
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

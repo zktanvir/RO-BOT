@@ -14,6 +14,14 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
+    print("""
+     ____   ___        ____   ___ _____
+    |  _ \ / _ \      | __ ) / _ \_   _|
+    | |_) | | | |_____|  _ \| | | || |
+    |  _ <| |_| |_____| |_) | |_| || |
+    |_| \_\\___/      |____/ \___/ |_|
+
+    """)
 	await bot.change_presence(
 	    activity=discord.Activity(
 	        type=discord.ActivityType.listening, name="Ro help"))

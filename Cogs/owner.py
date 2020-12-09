@@ -72,14 +72,12 @@ class Owner(commands.Cog):
 			await asyncio.sleep(3)
 		await ctx.send(msg)
 
-	"""@commands.command()
-	@commands.is_owner()
-	async def reload_all(self, ctx):
-		for i in """
+	
 
 	@commands.command(aliases=["eval"])
 	@commands.is_owner()
 	async def ev(self, ctx, *, cmd):
+	#this command is taken from https://gist.github.com/nitros12/2c3c265813121492655bc95aa54da6b9
 		fn_name = "_eval_expr"
 		cmd = cmd.strip("` py")
 		cmd = "\n".join(f"    {i}" for i in cmd.splitlines())
@@ -96,7 +94,7 @@ class Owner(commands.Cog):
 		}
 		res = exec(compile(parsed, filename="<ast>", mode="exec"), env)
 		result = (await eval(f"{fn_name}()", env))
-		#await ctx.send(f"```py\n{res}```")
+		await ctx.send(f"```py\n{res}```")
 
 
 def setup(bot):

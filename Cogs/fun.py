@@ -43,17 +43,7 @@ class Fun(commands.Cog):
 		jem.set_footer(text=f"Requested by {ctx.author.name}")
 		await ctx.send(embed=jem)
 
-	@commands.command(aliases=["rmeme", "randommeme"])
-	@commands.guild_only()
-	@commands.cooldown(2, 20, commands.BucketType.user)
-	async def meme(self, ctx):
-		response = requests.get(
-		    "https://meme-api.herokuapp.com/gimme/cleanmemes")
-		data = json.loads(response.text)
-		meme = discord.Embed(title=data["title"], color=discord.Colour.blue())
-		meme.set_image(url=data["url"])
-		meme.set_footer(text=f"Requested by {ctx.author.name}")
-		await ctx.send(embed=meme)
+
 
 	
 	@commands.command(aliases=['av'])
@@ -242,8 +232,6 @@ class Fun(commands.Cog):
 		image = data["hdurl"]
 		#obj = Client(nasa)
 		#print(obj.apod())
-		#print(data)
-		#key = "https://api.nasa.gov/planetary/apod?api_key=AHuiG7Onu9jRmTcOWPlbcSDI5Kq1HJYbC4RhjMhK"
 		#res = requests.get(key)
 		#data = json.loads(res.text)
 		ex = data["explanation"]

@@ -230,10 +230,6 @@ class Fun(commands.Cog):
 		response = requests.get(url)
 		data = json.loads(response.text)
 		image = data["hdurl"]
-		#obj = Client(nasa)
-		#print(obj.apod())
-		#res = requests.get(key)
-		#data = json.loads(res.text)
 		ex = data["explanation"]
 		date = data["date"]
 		em = discord.Embed(title=data["title"],color=discord.Color.blue())
@@ -243,14 +239,25 @@ class Fun(commands.Cog):
 		await ctx.send(embed=em)
 
 	@commands.command()
-	async def dog(self, ctx):
-		url = nekos.img('woof')
-		em = discord.Embed(color=discord.Color.blue())
+	async def bird(self, ctx):
+		response = requests.get("https://shibe.online/api/birds")
+		response = response.json()
+		url = response[0]
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
-		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
+		em.set_footer(text="Powered by shibe.online")
+		await ctx.send(embed=em)
+			
+	@commands.command()
+	async def shibe(self, ctx):
+		response = requests.get("https://shibe.online/api/shibes")
+		response = response.json()
+		url = response[0]
+		em = discord.Embed(title="",color=discord.Color.blue())
+		em.set_image(url=url)
+		em.set_footer(text="Powered by shibe.online")
 		await ctx.send(embed=em)
 		
-
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

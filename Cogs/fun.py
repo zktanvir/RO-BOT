@@ -3,6 +3,7 @@ from discord.ext import commands
 import requests
 import json
 import os
+import random
 import wolframalpha
 import aiohttp
 import asyncio
@@ -14,11 +15,15 @@ except:
 	import pokepy
 try:
 	import nekos
+	import giphypop
 except:
 	os.system('pip install nekos.py')
+	os.system("pip install giphypop")
 	import nekos
+	import giphypop
 
 
+token = os.environ.get('WIKITOKEN')
 apikey= os.environ.get("TENOR")
 nasa = os.environ.get("NASA")
 
@@ -43,8 +48,6 @@ class Fun(commands.Cog):
 		jem.set_footer(text=f"Requested by {ctx.author.name}")
 		await ctx.send(embed=jem)
 
-
-
 	
 	@commands.command(aliases=['av'])
 	@commands.guild_only()
@@ -68,7 +71,7 @@ class Fun(commands.Cog):
 	@commands.command()
 	async def neko(self, ctx):
 		url = nekos.img('neko')
-		em = discord.Embed(title="nya! 😸", color=discord.Color.blue())
+		em = discord.Embed(title="Nya! 😸", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life")
 		await ctx.send(embed=em)
@@ -76,7 +79,7 @@ class Fun(commands.Cog):
 	@commands.command()
 	async def waifu(self, ctx):
 		url = nekos.img('waifu')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life")
 		await ctx.send(embed=em)
@@ -87,7 +90,7 @@ class Fun(commands.Cog):
 			await ctx.send("*hugs air*")
 			return False
 		url = nekos.img('hug')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life")
 		await ctx.send(embed=em)
@@ -95,7 +98,7 @@ class Fun(commands.Cog):
 	@commands.command(aliases=["foxy"])
 	async def foxgirl(self, ctx):
 		url = nekos.img('fox_girl')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life")
 		await ctx.send(embed=em)
@@ -106,8 +109,7 @@ class Fun(commands.Cog):
 			await ctx.send("*pats air*")
 			return False
 		url = nekos.img('pat')
-		em = discord.Embed(title="→", color=discord.Color.blue())
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life")
 		await ctx.send(embed=em)
@@ -118,7 +120,7 @@ class Fun(commands.Cog):
 			await ctx.send("*tickles air*")
 			return False
 		url = nekos.img('tickle')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(
 		    icon_url=
@@ -142,7 +144,7 @@ class Fun(commands.Cog):
 		if member == None:
 			return False
 		url = nekos.img('kiss')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(
 		    text="Powered by nekos.life",
@@ -155,7 +157,7 @@ class Fun(commands.Cog):
 		if member is None:
 			return False
 		url = nekos.img('slap')
-		em = discord.Embed(title="→", color=discord.Color.blue())
+		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(
 		    text="Powered by nekos.life",
@@ -166,7 +168,7 @@ class Fun(commands.Cog):
 	@commands.command()
 	async def goose(self, ctx):
 		url = nekos.img('goose')
-		em = discord.Embed(title="→",color= discord.Color.blue())
+		em = discord.Embed(title="",color= discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
@@ -177,7 +179,7 @@ class Fun(commands.Cog):
 			await ctx.send("*Cuddles air*")
 			return False
 		url = nekos.img('cuddle')
-		em = discord.Embed(title="→",color=discord.Color.blue())
+		em = discord.Embed(title="",color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
@@ -203,10 +205,10 @@ class Fun(commands.Cog):
 		
 	@commands.command()
 	async def gif(self, ctx, *, query:str):
-		q = list(query)
-		query = "-".join(q)
-		t = tenorpy.Tenor()
-		url = t.random(query)
+		g = tenorpy.Tenor()
+		
+		url = g.random(query)
+		
 		em = discord.Embed(title="",color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by tenor")
@@ -230,6 +232,7 @@ class Fun(commands.Cog):
 		response = requests.get(url)
 		data = json.loads(response.text)
 		image = data["hdurl"]
+		
 		ex = data["explanation"]
 		date = data["date"]
 		em = discord.Embed(title=data["title"],color=discord.Color.blue())
@@ -237,17 +240,21 @@ class Fun(commands.Cog):
 		em.add_field(name="Date", value=date)
 		em.add_field(name="Explanation", value=ex)
 		await ctx.send(embed=em)
-
+		
+		
+		
 	@commands.command()
 	async def bird(self, ctx):
+		
 		response = requests.get("https://shibe.online/api/birds")
 		response = response.json()
+		
 		url = response[0]
 		em = discord.Embed(title="", color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by shibe.online")
 		await ctx.send(embed=em)
-			
+		
 	@commands.command()
 	async def shibe(self, ctx):
 		response = requests.get("https://shibe.online/api/shibes")
@@ -257,7 +264,7 @@ class Fun(commands.Cog):
 		em.set_image(url=url)
 		em.set_footer(text="Powered by shibe.online")
 		await ctx.send(embed=em)
-
+		
 	@commands.command()
 	async def kemonomimi(self, ctx):
 		url = nekos.img('kemonomimi')
@@ -265,7 +272,7 @@ class Fun(commands.Cog):
 		em.set_image(url=url)
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
-
+		
 	@commands.command()
 	async def baka(self, ctx, member:discord.Member=None):
 		url = nekos.img('baka')
@@ -274,6 +281,14 @@ class Fun(commands.Cog):
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
 		
-
+	@commands.command()
+	async def smug(self, ctx, member:discord.Member=None):
+		url = nekos.img('smug')
+		em = discord.Embed(color=discord.Color.blue())
+		em.set_image(url=url)
+		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
+		await ctx.send(embed=em)
+		
+		
 def setup(bot):
 	bot.add_cog(Fun(bot))

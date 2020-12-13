@@ -3,6 +3,7 @@ from discord.ext import commands
 import time
 import psutil
 import sys
+from datetime import datetime
 
 before = time.monotonic()
 
@@ -17,16 +18,17 @@ def convert(seconds):
 	uptime = "`%2d`d:`%d`h:`%2d`m:`%02d`s" % (day, hour, minutes, seconds)
 	return uptime
 
-def gconvert(t):
-	hour = ["h","hour","hours"]
-	minute = ["m","min","mins","minutes","minute"]
-	second = ["s","second","seconds","sec","secs"]
-	return True
+
 
 class General(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
+	@commands.Cog.listener()
+	async def on_ready():
+		print(f"{datetime.now()} General cog loaded")
+	
+	
 	@commands.command()
 	@commands.guild_only()
 	async def ping(self, ctx):
@@ -42,6 +44,7 @@ class General(commands.Cog):
 	@commands.command()
 	@commands.guild_only()
 	async def stats(self, ctx):
+		
 		after = time.monotonic()
 		uptime = after - before
 		users = 0
@@ -63,6 +66,12 @@ class General(commands.Cog):
 		)
 		stats.set_footer(text=f"Requested by {ctx.author.name}")
 		await ctx.send(embed=stats)
+		
+		
+	@commands.command()
+	async def support(self,ctx):
+		git_repo = "https://github.com/Zihad-Kabir-Tanvir/RO-BOT"
+		await ctx.send(f"""<:gitHub:786159554290778132> Support by contributing to this GitHub repo\n> {git_repo}""")
 
 	
 

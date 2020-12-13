@@ -7,9 +7,8 @@ import sqlite3
 class Automod(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-
-
-    #adding soon
+    
+    
     
     
 def setup(bot):

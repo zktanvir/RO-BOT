@@ -257,6 +257,22 @@ class Fun(commands.Cog):
 		em.set_image(url=url)
 		em.set_footer(text="Powered by shibe.online")
 		await ctx.send(embed=em)
+
+	@commands.command()
+	async def kemonomimi(self, ctx):
+		url = nekos.img('kemonomimi')
+		em = discord.Embed(color=discord.Color.blue())
+		em.set_image(url=url)
+		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
+		await ctx.send(embed=em)
+
+	@commands.command()
+	async def baka(self, ctx, member:discord.Member=None):
+		url = nekos.img('baka')
+		em = discord.Embed(color=discord.Color.blue())
+		em.set_image(url=url)
+		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
+		await ctx.send(embed=em)
 		
 
 def setup(bot):

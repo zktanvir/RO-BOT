@@ -28,5 +28,5 @@ python3 main.py
 ```
 
 # Suggest a feature
-Open an issue [here](https://github.com/zktanvir/RO-BOT/new) with your suggestion.
+Open an issue [here](https://github.com/zktanvir/RO-BOT/issues/new) with your suggestion.
 

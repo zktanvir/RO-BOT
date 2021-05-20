@@ -1,0 +1,9 @@
+discord.py
+colorama
+requests
+aiohttp
+tenorpy
+nekos.py
+psutil
+wikipedia
+

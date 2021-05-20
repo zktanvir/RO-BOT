@@ -4,29 +4,18 @@ import time
 import os
 from colorama import Fore,Back,Style
 from datetime import datetime
-from Cogs.utils import db
 
 
 
-default_prefix = "Ro "
-
-
-async def get_prefix(bot,message):
-	guild_id = message.guild.id
-	prefix = await db.prefix(guild_id)
-	return prefix
-	
-
-
+DEFAULT_PREFIX = "Ro "
 
 
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(
-    command_prefix=get_prefix,
+    command_prefix=DEFAULT_PREFIX,
     intents=intents,
     case_insensitive=True)
-#bot.remove_command("help")
 
 
 @bot.event
@@ -48,6 +37,13 @@ async def on_ready():
 for filename in os.listdir('./Cogs'):
 	if filename.endswith('.py'):
 		bot.load_extension(f"Cogs.{filename[:-3]}")
+
+"""
+create a ".env" file with the following
+```
+TOKEN="YOUR TOKEN HERE"
+```
+"""
 
 
 token = os.environ.get('TOKEN')

@@ -81,20 +81,6 @@ class Moderation(commands.Cog):
 			await ctx.send(
 			    f"Seems that you don't have permission to warn anyone")
 
-	"""@commands.command()
-	@commands.has_permissions(mute_members=True)
-	async def mute(self, ctx, member: discord.Member = None, dur, reason):
-		try:
-		  role = discord.utils.get(ctx.guild.roles, name="muted"
-		  await member.add_roles(role)
-		except:
-		  msg = await ctx.send("There's no muted role for this server. Should I create one?[reply with yes or no]")
-		  reply = await bot.wait_for('message',check=lambda message: message.author == ctx.author, timeout=30)
-		  if reply.strip().lower() == 'yes' or reply.strip().lower() == 'y':
-		    role = await ctx.guild.create_role(name="Shamelessly muted")
-		    for channel in ctx.guild.channels:
-		      await channel.set_permissions(muted, send_messages=False,read_message_history=False,read_messages=False)
-		      await member.add_roles(role)"""
 
 def setup(bot):
 	bot.add_cog(Moderation(bot))

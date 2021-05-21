@@ -2,7 +2,7 @@ discord.py
 colorama
 requests
 aiohttp
-tenorpy
+tengiphpy
 nekos.py
 psutil
 wikipedia

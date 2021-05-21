@@ -4,32 +4,18 @@ import requests
 import json
 import os
 import random
-import wolframalpha
 import aiohttp
 import asyncio
-import tenorpy
-try:
-	import pokepy
-except:
-	os.system("pip install pokepy")
-	import pokepy
-try:
-	import nekos
-	import giphypop
-except:
-	os.system('pip install nekos.py')
-	os.system("pip install giphypop")
-	import nekos
-	import giphypop
+import TenGiphPy
+import nekos
 
 
-TENOR_API_KEY= os.environ.get("TENOR")
+TENOR_TOKEN = os.environ.get('TENOR_TOKEN')
 NASA_API_KEY = os.environ.get("NASA_API_KEY")
 
 class Fun(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
-		self.app = wolframalpha.Client(token)
 
 	@commands.command(aliases=["rjoke", "randomjoke"])
 	@commands.guild_only()
@@ -138,18 +124,6 @@ class Fun(commands.Cog):
 		em.set_footer(text=f"@{ctx.author.name}")
 		await ctx.send(embed=em)
 
-	@commands.command()
-	async def kiss(self, ctx, member: discord.Member = None):
-		if member == None:
-			return False
-		url = nekos.img('kiss')
-		em = discord.Embed(title="", color=discord.Color.blue())
-		em.set_image(url=url)
-		em.set_footer(
-		    text="Powered by nekos.life",
-		    icon_url=
-		    'https://avatars2.githubusercontent.com/u/34457007?s=200&v=4')
-		await ctx.send(embed=em)
 
 	@commands.command()
 	async def slap(self, ctx, member: discord.Member = None):
@@ -189,11 +163,7 @@ class Fun(commands.Cog):
 		em = discord.Embed(title="Random Facts",color=discord.Color.blue(), description=fact)
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
-		
-	@commands.command(aliases=["ask","question"])
-	async def why(self, ctx):
-		why = nekos.why()
-		await ctx.send(why)
+	
 		
 	@commands.command(aliases=["tcat","asciicat"])
 	async def textcat(self, ctx):
@@ -204,10 +174,8 @@ class Fun(commands.Cog):
 		
 	@commands.command()
 	async def gif(self, ctx, *, query:str):
-		g = tenorpy.Tenor()
-		
-		url = g.random(query)
-		
+		tenor = TenGiphPy.Tenor(token=TENOR_TOKEN)
+		url = tenor.random(query)
 		em = discord.Embed(title="",color=discord.Color.blue())
 		em.set_image(url=url)
 		em.set_footer(text="Powered by tenor")
@@ -288,8 +256,7 @@ class Fun(commands.Cog):
 		em.set_footer(text="Powered by nekos.life",icon_url="https://avatars2.githubusercontent.com/u/34457007?s=200&v=4")
 		await ctx.send(embed=em)
 		
-		
-    	@commands.command()
+	@commands.command()
 	@commands.cooldown(5, 30, commands.BucketType.user)
 	async def feed(self, ctx, member: discord.Member = None):
 		if member is None:
@@ -352,6 +319,7 @@ class Fun(commands.Cog):
 				data = await resp.json()
 			img = data["message"]
 			em = embeds.fun_embed(title="",img=img,footer="Powered by nekobot.xyz")
+            
 		await ctx.send(f"Deepfried {user.name}",embed=em)
 
 

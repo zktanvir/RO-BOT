@@ -1,9 +1,7 @@
 import discord
 from discord.ext import commands
-import time
 import os
 from colorama import Fore,Back,Style
-from datetime import datetime
 
 
 

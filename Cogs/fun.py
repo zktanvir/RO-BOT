@@ -24,7 +24,7 @@ except:
 
 
 TENOR_API_KEY= os.environ.get("TENOR")
-NASA_API_KEY = os.environ.get("NASA")
+NASA_API_KEY = os.environ.get("NASA_API_KEY")
 
 class Fun(commands.Cog):
 	def __init__(self, bot):

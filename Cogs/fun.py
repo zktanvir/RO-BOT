@@ -9,9 +9,10 @@ import asyncio
 import TenGiphPy
 import nekos
 
-
-TENOR_TOKEN = os.environ.get('TENOR_TOKEN')
-NASA_API_KEY = os.environ.get("NASA_API_KEY")
+with open("config.json","r") as file:
+    data = file.read()
+TENOR_TOKEN = data['TENOR_API_KEY']
+NASA_API_KEY = data["NASA_API_KEY"]
 
 class Fun(commands.Cog):
 	def __init__(self, bot):

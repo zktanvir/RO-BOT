@@ -36,13 +36,6 @@ for filename in os.listdir('./Cogs'):
 	if filename.endswith('.py'):
 		bot.load_extension(f"Cogs.{filename[:-3]}")
 
-"""
-create a ".env" file with the following
-```
-TOKEN="YOUR TOKEN HERE"
-```
-"""
-
-
-token = os.environ.get('TOKEN')
+with open("config.json","r") as file:
+    token = json.load(file)["TOKEN"]
 bot.run(token, reconnect=True)

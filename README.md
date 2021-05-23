@@ -34,12 +34,7 @@ cd RO-BOT
 ```py
 pip3 install -r requirements.txt
 ```
-- In the same directory create a `.env` file and add the following
-```py
-TOKEN="YOUR BOT TOKEN"
-NASA_API_KEY="nasa apod api" #get it from https://api.nasa.gov/
-
-```
+- Open the `config.json` file and add the tokens and api keys which are needed.
 - Now run the main.py file
 ```py
 python3 main.py

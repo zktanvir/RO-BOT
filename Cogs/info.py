@@ -4,17 +4,19 @@ import wikipedia
 import requests
 import math
 import json
+from py_expression_eval import Parser
 
 
 class Info(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
+        self.parser = Parser()
 
 	@commands.command(aliases=["c", "calc"])
 	@commands.guild_only()
 	async def calculate(self, ctx, *, equation):
 		eq = (equation.replace("×", "*")).replace("÷", "/")
-		ans = eval(eq)
+		ans = self.parser.parse(eq).evaluate({})
 		await ctx.send(ans)
 
 	@commands.command(aliases=["ducksearch", "dsearch"])

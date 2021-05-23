@@ -6,4 +6,4 @@ tengiphpy
 nekos.py
 psutil
 wikipedia
-
+py-expression-eval

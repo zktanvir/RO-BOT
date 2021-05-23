@@ -10,7 +10,7 @@ from py_expression_eval import Parser
 class Info(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
-        self.parser = Parser()
+                self.parser = Parser()
 
 	@commands.command(aliases=["c", "calc"])
 	@commands.guild_only()
